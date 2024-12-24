@@ -1,0 +1,31 @@
+# Define the workflow name
+workflows:
+  flutter_ble_emitter_workflow:
+    name: Flutter BLE Emitter Workflow
+
+    environment:
+      flutter: stable # Specify the Flutter version (stable, beta, or a specific version like 3.13.0)
+    
+
+    scripts:
+      # Install Flutter dependencies
+      - name: Install dependencies
+        script: flutter pub get
+
+      # Run tests to ensure project stability
+      - name: Run tests
+        script: flutter test
+
+      # Build Android APK
+      - name: Build Android APK
+        script: flutter build apk --release
+
+      # Build iOS IPA
+      - name: Build iOS IPA
+        script: flutter build ipa --release
+
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk # Android artifact
+      - build/ios/ipa/ # iOS artifact
+
+
